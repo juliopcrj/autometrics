@@ -7,6 +7,9 @@ from queries import *
 
 class Autometrics:
 
+    sites_sheet = ["", "", "", "", ""]
+    sites_ids = ['1', '2', '3', '4', '6']
+
     def __init__(self):
         try:
             self.database = sql.connect(
@@ -20,16 +23,28 @@ class Autometrics:
 
     def __del__(self):
         print("Closing connection with database")
-        self.database.close()
+        self.close()
 
+    def close(self):
+        self.database.close()
 
     def test(self):
         print(self.database)
 
 
     def run(self):
-        pass
+        participants = participants.replace("\n", " ")
+        reports = reports.replace("\n", " ")
+        installed = installed.replace("\n", " ")
+        churn = churn.replace("\n", " ")
+        positive = positive.replace("\n", " ")
+        
+
+        for i in range(5):
+
 
 if __name__ == "__main__":
-    Autometrics().test()
+    pfs = Autometrics()
+    pfs.run()
+    del pfs
 
