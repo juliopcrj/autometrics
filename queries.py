@@ -15,13 +15,12 @@ SELECT
       JOIN Participant p ON p.id = a.participant_id
       WHERE
         p.currentParticipantState LIKE '%ENR%'
-        AND (DATE(a.receptionDate) < date(current_date())
+        AND (DATE(a.receptionDate) < date(current_date()))
         AND p.site_id = <SITE_ID>;
         
 '''
 churn = '''
 SELECT
-  responderam.Churn,
   count(distinct a.participant_id)
 from
   VigilanteActionsLog a
@@ -52,9 +51,7 @@ WHERE
     AND DATE(current_date() - interval 8 day)
   )
   AND p.site_id = <SITE_ID>
-GROUP BY
-  responderam.Churn
-
+AND responderam.Churn is null;
 '''
 positive = '''
 SELECT
