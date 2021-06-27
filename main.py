@@ -5,19 +5,19 @@ from gspread.utils import a1_to_rowcol, rowcol_to_a1
 from config import *
 from queries import *
 
+sites_sheet = [ "CRIE-UNIFESP", "RIO - IDOR", "BAHIA - IDOR", "UFSM", "CPCLIN" ]
+general_sheet = "https://docs.google.com/spreadsheets/d/1TvXq18udAPxT52-SbcwXWLqYTjgXiqTtUp6tp5-vJIo/edit#gid=0"
+sites_ids = ['1', '2', '3', '4', '6']
+begin_date = "2021-06-27"
+date_query = 'select current_date() - interval 7 day, current_date() - interval 1 day'
+
+sheet = None
+editing_column = 0
+database = None
+cursor = None
+
+
 class Autometrics:
-
-    sites_sheet = [ "CRIE-UNIFESP", "RIO - IDOR", "BAHIA - IDOR", "UFSM", "CPCLIN" ]
-    general_sheet = "https://docs.google.com/spreadsheets/d/1TvXq18udAPxT52-SbcwXWLqYTjgXiqTtUp6tp5-vJIo/edit#gid=0"
-    sites_ids = ['1', '2', '3', '4', '6']
-    begin_date = "2021-06-27"
-    date_query = 'select current_date() - interval 7 day, current_date() - interval 1 day'
-
-
-    sheet = None
-    editing_column = 0
-    database = None
-    cursor = None
 
     def __init__(self):
         try:
@@ -32,8 +32,9 @@ class Autometrics:
 
         # This block is just to retrieve the column in which the data should be written
         cursor = database.cursor()
-        cursor.execute("select timestampdiff(day, date("+begin_date+"), current_date())")
+        cursor.execute("select timestampdiff(day, date("+begin_date+"), current_date());")
         result = cursor.fetchone()
+        print(result)
         days = result[0]
         week = days//7
         editing_column = gspread.utils.a1_to_rowcol("AF4")[1] + week
