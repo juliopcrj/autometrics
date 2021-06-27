@@ -2,7 +2,6 @@ import sys
 import mysql.connector as sql
 import gspread
 from gspread.utils import a1_to_rowcol, rowcol_to_a1
-from oauth2client.service_account import ServiceAccountCredentials as SAC
 from config import *
 from queries import *
 
