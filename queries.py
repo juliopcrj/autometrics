@@ -55,7 +55,6 @@ AND responderam.Churn is null;
 '''
 positive = '''
 SELECT
-  V_Instance.answer,
     COUNT(DISTINCT V_Instance.participant_id)
     FROM
       VigilanteActionsLog AS V_Instance
