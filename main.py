@@ -6,7 +6,7 @@ from config import *
 import queries
 
 sites_sheet = [ "CRIE-UNIFESP", "CPCLIN", "RIO - IDOR", "UFSM", "BAHIA - IDOR" ]
-general_sheet = "https://docs.google.com/spreadsheets/d/1pSPtmqsWKV6PUejD_BlrX3ND1umhbCyJuYcWbI9-Zvs/edit#gid=0"
+general_sheet = "https://docs.google.com/spreadsheets/d/1TvXq18udAPxT52-SbcwXWLqYTjgXiqTtUp6tp5-vJIo/edit#gid=0"
 sites_ids = ['1', '2', '3', '5', '4']
 begin_date = "2021-06-27"
 date_query = 'select current_date() - interval 7 day, current_date() - interval 1 day'
