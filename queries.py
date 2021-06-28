@@ -38,7 +38,7 @@ from
       p.currentParticipantState LIKE '%ENR%'
       AND (
         DATE(a.receptionDate) BETWEEN DATE(current_date() - interval 7 day)
-        AND DATE(current_date())
+        AND DATE(current_date() - interval 1 day)
       )
       AND p.site_id = <SITE_ID>
     GROUP BY
@@ -64,7 +64,7 @@ SELECT
             p.currentParticipantState LIKE '%ENR%'
               AND (
                   DATE(V_Instance.receptionDate) BETWEEN DATE(current_date() - interval 7 day)
-                  AND DATE(current_date())
+                  AND DATE(current_date() - interval 1 day)
                 )
               AND V_Instance.answer = "yes"
               AND p.site_id = <SITE_ID>
@@ -80,7 +80,7 @@ SELECT
           p.currentParticipantState LIKE '%ENR%'
             AND (
                 DATE(a.receptionDate) BETWEEN DATE(current_date() - interval 7 day)
-                    AND DATE(current_date())
+                    AND DATE(current_date() - interval 1 day)
                   )
             AND p.site_id = <SITE_ID>
 '''
