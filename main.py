@@ -15,11 +15,6 @@ date_query = 'select current_date() - interval 7 day, current_date() - interval 
 
 class Autometrics:
 
-    #self.sheet = None
-    #self.editing_column = 0
-    #self.database = None
-    #self.cursor = None
-
     def __init__(self):
         try:
             self.database = sql.connect(
@@ -54,6 +49,14 @@ class Autometrics:
         churn = queries.churn.replace("\n", " ")
         positive = queries.positive.replace("\n", " ")
 
+        self.cursor.execute(date_query)
+        _data = self.cursor.fetchone()
+        _inicio = str(_data[0]).split("-")
+        _inicio = "/".join([_inicio[2], _inicio[1], _inicio[0]])
+        _fim = str(_data[1]).split("-")
+        _fim = "/".join([_fim[2], _fim[1], _fim[0]])
+        _data = _inicio + "-" + _fim
+
         for i in range(5):
             worksheet = self.sheet.worksheet(sites_sheet[i])
             _participants = participants.replace("<SITE_ID>", sites_ids[i])
@@ -64,13 +67,6 @@ class Autometrics:
 
 
             # Sets the date
-            self.cursor.execute(date_query)
-            _data = self.cursor.fetchone()
-            _inicio = str(_data[0]).split("-")
-            _inicio = "/".join([_inicio[2], _inicio[1], _inicio[0]])
-            _fim = str(_data[1]).split("-")
-            _fim = "/".join([_fim[2], _fim[1], _fim[0]])
-            _data = _inicio + "-" + _fim
             worksheet.update_cell(4, self.editing_column, _data)
             worksheet.format(gspread.utils.rowcol_to_a1(4, self.editing_column), {'textFormat':{'bold':True}})
 
