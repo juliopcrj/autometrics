@@ -67,7 +67,7 @@ SELECT
                   AND DATE(current_date() - interval 1 day)
                 )
               AND V_Instance.answer = "yes"
-              AND p.site_id = <SITE_ID>
+              AND p.site_id = <SITE_ID>;
 '''
 reports = '''
 SELECT
@@ -82,5 +82,5 @@ SELECT
                 DATE(a.receptionDate) BETWEEN DATE(current_date() - interval 7 day)
                     AND DATE(current_date() - interval 1 day)
                   )
-            AND p.site_id = <SITE_ID>
+            AND p.site_id = <SITE_ID>;
 '''
